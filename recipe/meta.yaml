@@ -6,25 +6,25 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-ufish-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-ufish-{{ version }}.tar.gz
   sha256: b149d1711cf043a32b038622a8b9efddb4c1e0d37144c9e9d068fd874994bd74
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.9
+    - python {{ python_min }}
     - setuptools >=42.0.0
     - wheel
   run:
     - magicgui
     - napari
     - numpy
-    - python >=3.9
+    - python >={{ python_min }}
     - qtpy
     - scikit-image
     - ufish
@@ -38,6 +38,7 @@ test:
   requires:
     - pip
     - pyqt
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/napari-ufish
